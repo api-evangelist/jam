@@ -1,0 +1,32 @@
+generated: '2026-07-19'
+method: searched
+source: https://jam.dev/docs/jam-mcp, https://jam.dev/docs/personal-access-tokens, https://mcp.jam.dev/.well-known/oauth-authorization-server
+summary:
+  types: [oauth2, http]
+  api_key_in: [header]
+  oauth2_flows: [authorizationCode]
+schemes:
+  - name: OAuth2
+    type: oauth2
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://api.jam.dev/oauth/authorize
+        tokenUrl: https://api.jam.dev/oauth/token
+        refreshUrl: https://api.jam.dev/oauth/token
+        registrationUrl: https://api.jam.dev/oauth/register
+        introspectionUrl: https://api.jam.dev/oauth/introspect
+        revocationUrl: https://api.jam.dev/oauth/revoke
+        pkce: S256
+        grant_types: [authorization_code, refresh_token]
+        scopes: [mcp:read, mcp:write]
+    sources: [https://mcp.jam.dev/.well-known/oauth-authorization-server]
+    used_by: MCP server (browser OAuth), CLI (jam auth login)
+  - name: PersonalAccessToken
+    type: http
+    scheme: bearer
+    bearerFormat: jam_pat_<random>
+    description: >-
+      Personal Access Tokens for headless MCP clients and CI. Workspace-scoped,
+      user-tied, mandatory expiration (7/30/90 days or 1 year), scope-selectable,
+      stored server-side only as a hash. Used as an Authorization: Bearer header.
+    sources: [https://jam.dev/docs/personal-access-tokens]
