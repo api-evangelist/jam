@@ -1,0 +1,19 @@
+generated: '2026-07-19'
+method: searched
+source: https://jam.instatus.com/, https://jam.dev/docs/cli
+status_page: https://jam.instatus.com/
+versioning:
+  cli:
+    scheme: binary-channel
+    docs: https://jam.dev/docs/cli
+    notes: CLI is self-updating via `jam upgrade [--target <version>]`; `jam doctor` reports channel and version.
+  sdk:
+    scheme: semver
+    current: 1.0.1
+    docs: https://www.npmjs.com/package/@jam.dev/sdk
+deprecation:
+  policy_url: null
+  notes: No formal API deprecation / Sunset-header policy published (surface is MCP + CLI + webhooks, not a versioned REST API).
+sla:
+  url: null
+  notes: Uptime published via the Instatus status page; no contractual SLA page found.

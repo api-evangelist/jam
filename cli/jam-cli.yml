@@ -1,0 +1,40 @@
+generated: '2026-07-19'
+method: searched
+source: https://jam.dev/docs/cli
+name: jam
+description: First-party Jam CLI — authenticate, read Jam data, and create Jams from the terminal. Built for shell scripts, CI jobs, and AI coding agents.
+platforms: [macOS, Linux x64, Linux arm64, Windows (via WSL)]
+install:
+  - method: installer
+    command: curl -fsSL https://native.jam.dev/install | bash
+    notes: Installs binary to ~/.local/bin/jam and adds it to PATH.
+  - method: self-update
+    command: jam upgrade [--target <version>]
+auth:
+  modes:
+    - browser OAuth (jam auth login)
+    - personal access token (echo "jam_pat_..." | jam auth login --token)
+    - JAM_TOKEN env var (never written to disk)
+  credentials_path: ~/.config/jam/credentials.json  # 0600
+machine_readable: jam agent-context   # prints full command surface + JSON Schemas as JSON
+bundled_agent_skills: true            # jam skills list / install / source (ships a SKILL.md)
+command_groups:
+  - group: auth
+    commands: [auth login, auth logout, auth status]
+  - group: get
+    commands: [get jam, get metadata, get console, get network, get events, get transcript, get intents, get screenshots, get frames]
+  - group: list
+    commands: [list jams, list folders, list members]
+  - group: create
+    commands: [create jam, create comment]
+  - group: update
+    commands: [update jam]
+  - group: recording-links
+    commands: [recording-links urls, recording-links list, recording-links get, recording-links jams, recording-links create, recording-links update, recording-links revoke, recording-links verify]
+  - group: skills
+    commands: [skills list, skills install, skills path, skills source]
+  - group: maintenance
+    commands: [agent-context, doctor, upgrade, uninstall]
+conventions:
+  pagination: cursor via --after; --limit default 20-50, max 500
+  output_shapes: [Single, Paginated, Receipt, List, Path, Side effect]

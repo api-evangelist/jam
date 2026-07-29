@@ -1,0 +1,32 @@
+generated: '2026-07-19'
+method: searched
+source: https://jam.dev/docs/custom-logs, https://jam.dev/docs/cli, https://github.com/jamdotdev
+packages:
+  - language: javascript
+    registry: npm
+    name: "@jam.dev/sdk"
+    url: https://www.npmjs.com/package/@jam.dev/sdk
+    install: npm install '@jam.dev/sdk'
+    version: 1.0.1
+    repository: https://github.com/jamdotdev/sdk
+    description: The Jam SDK — attach custom metadata (jam.metadata()) to bug reports.
+    official: true
+  - language: shell
+    registry: native
+    name: jam
+    url: https://jam.dev/docs/cli
+    install: curl -fsSL https://native.jam.dev/install | bash
+    description: First-party Jam CLI — authenticate, read Jam data, and create Jams from the terminal (macOS/Linux x64+arm64).
+    official: true
+  - language: swift
+    registry: github
+    name: jam-ios-log
+    url: https://github.com/jamdotdev/jam-ios-log
+    description: JamLog framework — send iOS app log events to Jam.
+    official: true
+  - language: javascript
+    registry: npm
+    name: expo-jam-log
+    url: https://github.com/jamdotdev/expo-jam-log
+    description: React Native / Expo module to send log events to Jam for iOS.
+    official: true

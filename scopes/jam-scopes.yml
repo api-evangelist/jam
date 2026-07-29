@@ -1,0 +1,23 @@
+generated: '2026-07-19'
+method: searched
+source: https://mcp.jam.dev/.well-known/oauth-authorization-server
+docs: https://jam.dev/docs/personal-access-tokens
+schemes:
+  - name: OAuth2
+    source: https://mcp.jam.dev/.well-known/oauth-authorization-server
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://api.jam.dev/oauth/authorize
+        tokenUrl: https://api.jam.dev/oauth/token
+        pkce: S256
+scopes:
+  - scope: mcp:read
+    description: Read access to Jam data (details, console logs, network requests, screenshots, transcripts, members, folders, recording links) via the MCP server and CLI.
+    flows: [authorizationCode]
+  - scope: mcp:write
+    description: Write access via the MCP server and CLI — create comments, move Jams between folders, create/update/revoke recording links.
+    flows: [authorizationCode]
+notes: >-
+  Scopes are also selectable when minting Personal Access Tokens
+  (Settings -> MCP). Tokens carry the jam_pat_ prefix and are used as Bearer
+  credentials for headless/CI MCP clients.

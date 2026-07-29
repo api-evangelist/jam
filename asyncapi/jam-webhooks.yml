@@ -1,0 +1,21 @@
+generated: '2026-07-19'
+method: searched
+source: https://jam.dev/docs/webhooks
+spec_type: Webhooks
+transport: HTTP POST to a workspace-configured HTTPS endpoint
+scope: per Jam workspace
+signing:
+  format: Standard Webhooks (standardwebhooks.com), powered by Svix
+  algorithm: HMAC-SHA256 over "${svix-id}.${svix-timestamp}.${body}", base64-encoded
+  headers: [svix-id, svix-timestamp, svix-signature]
+  secret_prefix: whsec_
+  notes: Signatures may carry multiple space-separated versions during key rotation.
+events:
+  - name: jam.created
+    description: Fired when a new Jam is captured from any origin (Chrome extension, iOS app, dashboard, Fin/Intercom integration, or Recording Link).
+  - name: recording_link.created
+    description: Fired when a Recording Link is created in the workspace from any origin.
+  - name: intercom.recorder.recorded
+    description: Fired when a customer submits a screen recording through Jam's Intercom integration.
+  - name: intercom.recorder.opted_out
+    description: Fired when a customer declines to record through Jam's Intercom integration.

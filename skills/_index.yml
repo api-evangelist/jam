@@ -1,0 +1,16 @@
+generated: '2026-07-19'
+method: generated
+source: grounded in Jam MCP tools (https://jam.dev/docs/jam-mcp) and CLI commands (https://jam.dev/docs/cli)
+note: >-
+  Jam also ships its own bundled agent skill via the CLI (`jam skills list` /
+  `jam skills install` / `jam skills source` print a SKILL.md). These generated
+  skills mirror Jam's marquee agent flows using its verified MCP tool names.
+skills:
+  - file: jam-bug-to-fix.md
+    name: Triage a Jam bug report into a fix
+    api: mcp/jam-mcp.yml
+    operations: [getDetails, getConsoleLogs, getNetworkRequests, getUserEvents, getVideoTranscript, analyzeVideo, createComment]
+  - file: jam-collect-recordings.md
+    name: Collect customer screen recordings with Recording Links
+    api: mcp/jam-mcp.yml
+    operations: [createRecordingLink, listRecordingLinks, listRecordingLinkJams, getRecordingUrlVerifyLink, revokeRecordingLink]

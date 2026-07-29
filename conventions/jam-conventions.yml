@@ -1,0 +1,33 @@
+generated: '2026-07-19'
+method: searched
+source: https://jam.dev/docs/cli, https://jam.dev/docs/webhooks, https://jam.dev/docs/jam-mcp, https://jam.dev/docs/custom-logs
+authentication:
+  style: OAuth2 authorization_code (PKCE S256) or Personal Access Token (Bearer, jam_pat_ prefix)
+  see: authentication/jam-authentication.yml
+pagination:
+  style: cursor
+  params: {cursor: --after, page_size: --limit}
+  defaults: {limit_default: 20, limit_max: 500}
+  notes: List/get-stream reads (jams, folders, members, console, network, events) are cursor-paginated via --after; --limit default 20-50 depending on command, max 500.
+idempotency:
+  supported: false
+  notes: No idempotency-key header/contract is documented for the MCP/CLI surface.
+metadata:
+  mechanism: jam.metadata() SDK callback
+  constraints: {type: Object, max_size_kb: 10, must_be_json_serializable: true}
+  see: packages/jam-packages.yml
+webhooks:
+  signing: Standard Webhooks (standardwebhooks.com) via Svix
+  algorithm: HMAC-SHA256 over "${svix-id}.${svix-timestamp}.${body}", base64
+  headers: [svix-id, svix-timestamp, svix-signature]
+  secret_prefix: whsec_
+  see: asyncapi/jam-webhooks.yml
+error_envelope:
+  notes: CLI intents reads return {"status":"not_requested","value":null} for absent data (treat as absence, not error); transcript returns {status, vtt} with null vtt while pending.
+versioning:
+  see: lifecycle/jam-lifecycle.yml
+cross_links:
+  - authentication/jam-authentication.yml
+  - scopes/jam-scopes.yml
+  - lifecycle/jam-lifecycle.yml
+  - asyncapi/jam-webhooks.yml
