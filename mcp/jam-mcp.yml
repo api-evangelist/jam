@@ -4,62 +4,71 @@ status: published
 source: https://jam.dev/docs/jam-mcp
 server:
   name: Jam
-  transport: http          # streamable HTTP + SSE
+  transport: http
   url: https://mcp.jam.dev/mcp
 auth:
   type: oauth2
   authorization_server: https://api.jam.dev
-  scopes: [mcp:read, mcp:write]
+  scopes:
+  - mcp:read
+  - mcp:write
   pkce: S256
   alt: Personal Access Token (jam_pat_ prefix) as Bearer header for headless/CI
   well_known:
-    - well-known/jam-oauth-authorization-server.json
-    - well-known/jam-oauth-protected-resource.json
+  - well-known/jam-oauth-authorization-server.json
+  - well-known/jam-oauth-protected-resource.json
 install:
   claude_code: claude mcp add Jam https://mcp.jam.dev/mcp -t http -s user
   cursor: '{ "mcpServers": { "jam": { "url": "https://mcp.jam.dev/mcp" } } }'
 tools:
-  - name: getDetails
-    description: Summary of who created the Jam and what occurred
-  - name: getConsoleLogs
-    description: Console output with filtering options
-  - name: getNetworkRequests
-    description: HTTP requests as JSON with status/content filters
-  - name: getScreenshot
-    description: Visual captures from screenshot Jams
-  - name: getUserEvents
-    description: Clicks, inputs, and navigation in readable format
-  - name: getMetadata
-    description: Custom key-value data attached via the SDK
-  - name: getVideoTranscript
-    description: Spoken audio in WebVTT format with timestamps
-  - name: analyzeVideo
-    description: Extract insights, detect issues, and provide structured feedback
-  - name: getFrames
-    description: Still images at specific timestamps or evenly-spaced intervals
-  - name: listJams
-    description: Search and filter Jam recordings
-  - name: listMembers
-    description: Team member directory
-  - name: listFolders
-    description: Available folder browsing
-  - name: createComment
-    description: Add Markdown comments to Jams
-  - name: updateJam
-    description: Move Jams between folders
-  - name: listRecordingUrls
-    description: Connected recording domains
-  - name: getRecordingUrlVerifyLink
-    description: Domain verification flow
-  - name: listRecordingLinks
-    description: Team's recording links with pagination
-  - name: getRecordingLink
-    description: Individual recording link retrieval
-  - name: listRecordingLinkJams
-    description: Jams from a specific recording link
-  - name: createRecordingLink
-    description: Generate reusable recording links
-  - name: updateRecordingLink
-    description: Edit recording link properties
-  - name: revokeRecordingLink
-    description: Disable recording links (soft-delete)
+- name: getDetails
+  description: Summary of who created the Jam and what occurred
+- name: getConsoleLogs
+  description: Console output with filtering options
+- name: getNetworkRequests
+  description: HTTP requests as JSON with status/content filters
+- name: getScreenshot
+  description: Visual captures from screenshot Jams
+- name: getUserEvents
+  description: Clicks, inputs, and navigation in readable format
+- name: getMetadata
+  description: Custom key-value data attached via the SDK
+- name: getVideoTranscript
+  description: Spoken audio in WebVTT format with timestamps
+- name: analyzeVideo
+  description: Extract insights, detect issues, and provide structured feedback
+- name: getFrames
+  description: Still images at specific timestamps or evenly-spaced intervals
+- name: listJams
+  description: Search and filter Jam recordings
+- name: listMembers
+  description: Team member directory
+- name: listFolders
+  description: Available folder browsing
+- name: createComment
+  description: Add Markdown comments to Jams
+- name: updateJam
+  description: Move Jams between folders
+- name: listRecordingUrls
+  description: Connected recording domains
+- name: getRecordingUrlVerifyLink
+  description: Domain verification flow
+- name: listRecordingLinks
+  description: Team's recording links with pagination
+- name: getRecordingLink
+  description: Individual recording link retrieval
+- name: listRecordingLinkJams
+  description: Jams from a specific recording link
+- name: createRecordingLink
+  description: Generate reusable recording links
+- name: updateRecordingLink
+  description: Edit recording link properties
+- name: revokeRecordingLink
+  description: Disable recording links (soft-delete)
+deployment:
+  mode: remote
+  endpoint: https://mcp.jam.dev/mcp
+  verified: probed
+  probe: gated
+  checked: '2026-08-12'
+  source: catalog MCP census
