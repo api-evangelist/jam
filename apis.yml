@@ -44,6 +44,15 @@ tags:
 - Quality Assurance
 - Observability
 - Screen Recording
+- MCP
+tags_raw:
+- Company
+- Developer Tools
+- Bug Reporting
+- Debugging
+- Quality Assurance
+- Observability
+- Screen Recording
 - Model Context Protocol
 apis:
 - name: Jam MCP Server
