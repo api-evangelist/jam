@@ -1,26 +1,46 @@
-generated: '2026-07-19'
+generated: '2026-09-19'
 method: searched
 source: live probes of /.well-known/ on jam.dev and mcp.jam.dev
 hosts:
-  - host: https://mcp.jam.dev
-    documents:
-      - path: /.well-known/oauth-authorization-server   # RFC 8414
-        status: 200
-        file: jam-oauth-authorization-server.json
-      - path: /.well-known/oauth-protected-resource     # RFC 9728
-        status: 200
-        file: jam-oauth-protected-resource.json
-      - path: /.well-known/openid-configuration          # OIDC discovery
-        status: 404
-  - host: https://jam.dev
-    documents:
-      - path: /.well-known/security.txt                  # RFC 9116
-        status: 404
-      - path: /.well-known/openid-configuration
-        status: 404
-      - path: /.well-known/oauth-authorization-server
-        status: 404
-      - path: /.well-known/api-catalog                   # RFC 9727
-        status: 404
-      - path: /.well-known/ai-plugin.json
-        status: 404
+- host: https://mcp.jam.dev
+  documents:
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: jam-oauth-authorization-server.json
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    file: jam-oauth-protected-resource.json
+  - path: /.well-known/openid-configuration
+    status: 404
+- host: https://jam.dev
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://api.jam.dev
+  documents:
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: jam-api-oauth-authorization-server.json
+    bytes: 608
+  path_echo_control: passed
+x-mcp-probe:
+  probed: '2026-09-19'
+  issue: roadmap#321, roadmap#337
+  documents:
+  - host: https://api.jam.dev
+    path: /.well-known/oauth-authorization-server
+    file: jam-api-oauth-authorization-server.json
+  validated_on: resource (RFC 9728) / issuer (RFC 8414, OIDC)
+  negative_control: one per host; a 2xx JSON object at an impossible path discards the host
+note: 'MCP-host OAuth discovery added 2026-09-19 (roadmap#321/#337): the harvest visits a provider''s
+  primary hosts, and RFC 9728 protected-resource metadata lives on the MCP host, so these documents existed
+  and were invisible to the scorer. Fetched live and validated on `resource`/`issuer`; one negative control
+  per host.'
