@@ -6,10 +6,12 @@ checked:
 - https://github.com/marketplace?type=apps
 - https://proxy.golang.org
 - https://pypi.org/pypi
+- https://registry.modelcontextprotocol.io/v0/servers
 - https://registry.npmjs.org
 - https://repo1.maven.org/maven2
 - https://rubygems.org/api/v1
 - slack/integrations/slack-integration-edges.yml
+- atlassian/integrations/atlassian-integration-edges.yml
 marketplace_apps: []
 edges:
 - partner_name: GitHub Marketplace (apps)
@@ -30,23 +32,6 @@ edges:
   - Verified domain
   detected_by: sweep-devtools.py
   detected: '2026-10-14'
-- partner_name: Slack (own)
-  partner: slack
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://slack.com/marketplace/A012E24MNGG-jam
-  mirror_of: slack/integrations/slack-integration-edges.yml
-  apps:
-  - Jam
-  listing_count: 1
-  detected: '2026-10-18'
-  detected_by: mirror-platform-listings.py
-  category: Slack app
 - partner_name: npm registry
   partner: npm
   partner_match: register
@@ -86,5 +71,70 @@ edges:
     detected: '2026-10-18'
   detected_by: sweep-official-sdks.py
   first_seen: '2026-10-18'
+- partner_name: MCP Registry
+  partner: mcp
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://registry.modelcontextprotocol.io/v0/servers?search=dev.jam
+  contract_reference:
+    register: registry.modelcontextprotocol.io
+    spec_file: null
+    role: mcp-server-listing
+    registered_name: dev.jam/jam
+    register_id: dev.jam/jam
+    detected_by: sweep-agent-tools.py
+    detected: '2026-10-19'
+  mcp_registry:
+    servers:
+    - dev.jam/jam
+    hosted_remote: 1
+    local_package: 0
+    transports:
+      streamable-http: 1
+    auth_declared: 0
+    catalog_declared: true
+    namespace_domains:
+    - jam.dev
+  matched_by:
+  - namespace-domain
+  detected_by: sweep-agent-tools.py
+  first_seen: '2026-10-19'
+- partner_name: Slack (own)
+  partner: slack
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://slack.com/marketplace/A012E24MNGG-jam
+  mirror_of: slack/integrations/slack-integration-edges.yml
+  apps:
+  - Jam
+  listing_count: 1
+  detected: '2026-10-18'
+  detected_by: mirror-platform-listings.py
+  category: Slack app
+- partner_name: Atlassian (own)
+  partner: atlassian
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.atlassian.com/vendors/1222693/jam
+  mirror_of: atlassian/integrations/atlassian-integration-edges.yml
+  apps:
+  - Jam - Share screen recordings with dev context
+  listing_count: 1
+  detected: '2026-10-21'
+  detected_by: mirror-platform-listings.py
+  category: Workflow
 source:
 - https://github.com/marketplace?type=apps
